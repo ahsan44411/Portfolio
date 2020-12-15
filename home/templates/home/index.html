@@ -1,0 +1,838 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Fixed Bootstrap 4 Vertical Sidebar Navigation Example</title>
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="core.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="scroll-down.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300&display=swap" rel="stylesheet">
+    <script src="core.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Helvetica';
+            background-color: #263238;
+        }
+
+        .separator {
+            margin: 3rem 0;
+            border-bottom: 1px dashed #fff;
+        }
+
+        .text-uppercase {
+            letter-spacing: 0.1em;
+        }
+
+        .text-gray {
+            color: #aaa;
+        }
+
+        .li:hover {
+            color: #141E30;
+        }
+
+        .vertical-nav {
+            min-width: 17rem;
+            width: 17rem;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s;
+        }
+
+        .page-content {
+            width: calc(100% - 17rem);
+            margin-left: 17rem;
+            transition: all 0.4s;
+        }
+
+        /* for toggle behavior */
+
+        #sidebar.active {
+            margin-left: -17rem;
+        }
+
+        #content.active {
+            width: 100%;
+            margin: 0;
+        }
+
+        .inline {
+            display: inline !important;
+        }
+
+        @media (max-width: 768px) {
+            #sidebar {
+                margin-left: -17rem;
+            }
+
+            #sidebar.active {
+                margin-left: 0;
+            }
+
+            #content {
+                width: 100%;
+                margin: 0;
+            }
+
+            #content.active {
+                margin-left: 17rem;
+                width: calc(100% - 17rem);
+            }
+        }
+
+        .embed-responsive .card-img-top {
+        {#object-fit: cover;#}
+        }
+
+        body {
+            overflow: scroll;
+        }
+
+        .separator-type, .title-type, .intro-type, .content-type .intro-type p {
+            position: relative;
+        }
+
+        .intro-type .container {
+            padding: 107px 0px 102px 0px !important;
+        }
+
+        .company-heading h1 {
+            margin-bottom: 60px;
+            padding-bottom: 50px;
+            line-height: 80px;
+            color: #fff;
+            font-weight: 700 !important;
+            text-align: center;
+        }
+
+        .jumbo {
+            margin-top: 20px;
+        }
+
+        .display-4 {
+            color: #fff;
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+
+        .ct-btn-scroll {
+            width: 49px;
+            height: 49px;
+            position: absolute;
+            bottom: 30%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            padding-top: 50px;
+            z-index: 9;
+            border-radius: 50%;
+            -webkit-transition: background-color 0.25s ease-in-out;
+            transition: background-color 0.25s ease-in-out;
+        }
+
+        img, figure {
+            max-width: 100%;
+        }
+
+
+        #parent {
+            text-align: center;
+        }
+
+        .center {
+            display: inline-block;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+{% load static %}
+<!-- Vertical navbar -->
+<div class="vertical-nav" style="background-color:#03506f" id="sidebar">
+    <div class="row pt-5"></div>
+    <div class="pt-5 pl-3 mb-4">
+        <div class="container" style="color: white">
+            <h2 class="">Ahsan Mukhtar</h2>
+            <p class="">Software Engineer</p>
+        </div>
+    </div>
+    <div class="row pt-5"></div>
+    <div class="row pt-5"></div>
+    <div class="row pt-5 pl-4">
+        <ul class="nav flex-column mb-0">
+            <li class="nav-item">
+                <a href="../../static/home/Muhammad%20Ahsan%20Mukhtar%20CV.pdf" class="nav-link text-light"
+                   style="font-size: 15px">
+                    <i class="fa fa-arrow-circle-down mr-3 fa-fw" aria-hidden="true"></i>
+                    CV
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="https://github.com/ahsan44411" class="nav-link text-light" style="font-size: 15px">
+                    <i class="fa fa-github mr-3 fa-fw" aria-hidden="true"></i>
+                    GitHub
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light"
+                   style="font-size: 15px">
+                    <i class="fa fa-mobile mr-3 fa-fw" aria-hidden="true"></i>
+                    +92-333-4230930
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" style="font-size: 15px">
+                    <i class="fa fa-envelope mr-3 fa-fw" aria-hidden="true"></i>
+                    ahsan44411@gmail.com
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="https://www.linkedin.com/in/muhammad-ahsan-mukhtar/" class="nav-link text-light"
+                   style="font-size: 15px">
+                    <i class="fa fa-linkedin-square mr-3 fa-fw" aria-hidden="true"></i>
+                    LinkedIn
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- End vertical navbar -->
+
+<!-- Page content holder -->
+<div class="page-content" id="content">
+    <!-- Toggle button-->
+    <div class="pt-4" style="background-color: black;">
+        <button id="sidebarCollapse" type="button" class="btn btn-dark bg-dark rounded-pill shadow-sm px-4 mb-4"><i
+                class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold"></small></button>
+    </div>
+    <!-- Cover-->
+    <div class="" style="background-color: black;">
+        <section class="company-heading intro-type" id="parallax-one">
+            <div class="row product-title-info">
+                <a href="#about" class="arrowbtn ct-btn-scroll ct-js-btn-scroll" type="button"><img
+                        alt="Arrow Down Icon"
+                        src="https://raw.githubusercontent.com/solodev/scroll-down-anchor/master/images/arrow-down-1.png"></a>
+            </div>
+            <div class=""
+                 style="opacity: 50%; background-image: url('../../static/home/me.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br>
+            </div>
+        </section>
+    </div>
+    <!-- About -->
+    <div id="about" class="p-5" style="color: white; font-size: 15px;">
+        <div class="container">
+            <h2 class="text-center">About Ahsan</h2>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row" style="margin: 0 auto;">
+                        <div class="container">
+                            <p style="font-size: 20px">
+                                I'm a Software engineer currently working in Islamabad. I graduated from PIEAS
+                                with a
+                                Bachelors Degree Computer and Information Sciences with focus in Computer Vision.
+                                I'm always interested in
+                                reading
+                                on new research, development and world affairs. My expertise are in Python, Machine
+                                Learning, Django and Databases.
+                                I am an amateur guitarist and a die hard gamer aswell.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="p-4" style="background-color: white;">
+        <div class="container">
+            <h2 class="text-center">Experience</h2>
+
+            <br>
+            <br>
+
+            <div class="row" style="margin: 0 auto;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7">
+                    <b><p style="font-size: 25px;">Techylem</p></b>
+                    <b><p>Python and AI Developer</p></b>
+                    <b><p>Responsibilities:</p></b>
+                    <li>
+                        Training and Integrating Machine learning models.
+                    </li>
+                    <li>
+                        Building backend software.
+                    </li>
+                    <li>
+                        Creating and maintaining databases.
+                    </li>
+
+                    <br>
+
+                    <b><p>Libraries and Software</p></b>
+                    <li>Operating System: Ubuntu/Linux | Windows</li>
+                    <li>Languages: Python | C++</li>
+                    <li>Machine Learning: Tensorflow 2.0 | Keras | OpenCV | Matplotlib | Pandas | NLTK</li>
+                    <li>Backend: Django | SQL Databases | MangoDB</li>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <p style="font-size: 20px;">July 2020 - Present</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="container">
+                    <div class="container">
+                        <div class="container">
+                            <div class="container">
+                                <div class="container">
+                                    <div class="container">
+                                        <div class="container">
+                                            <div class="container">
+                                                <div class="container">
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin: 0 auto;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7">
+                    <b><p style="font-size: 25px">Pattern Recognition Lab, PIEAS</p></b>
+                    <b><p>AI Research Fellowship</p></b>
+
+                    <b><p>Responsibilities:</p></b>
+                    <li>
+                        Buidling project pipeline and planning
+                    </li>
+                    <li>
+                        Dataset collection, cleaning and annotation
+                    </li>
+                    <li>
+                        Training deep learning models.
+                    </li>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <p style="font-size: 20px">September 2019 - May 2020</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="container">
+                    <div class="container">
+                        <div class="container">
+                            <div class="container">
+                                <div class="container">
+                                    <div class="container">
+                                        <div class="container">
+                                            <div class="container">
+                                                <div class="container">
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin: 0 auto;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7">
+                    <b><p style="font-size: 25px">Quest Lab</p></b>
+                    <b><p>AI Intern</p></b>
+                    <b><p>Responsibilities:</p></b>
+                    <li>
+                        Building algorithms for drone facial recognition systems.
+                    </li>
+                    <li>
+                        Testing algorithms on Tello drones.
+                    </li>
+                    <li>
+                        Training deep learning models.
+                    </li>
+                </div>
+
+                <div class="col-lg-4">
+                    <p style="font-size: 20px">May 2019 - July 2019</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <h2 class="text-center">Education</h2>
+            <br>
+            <br>
+            <div class="row" style="margin: 0 auto;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7">
+                    <b><p style="font-size: 25px;">BS Computer and Information Sciences</p></b>
+                    <b><p>Pakistan Institute of Engineer and Applied Sciences</p></b>
+                    <p><b>Thesis:</b> Cancer Detection and Analysis using Deep Learning</p>
+                    <p><b>C.GPA:</b> 3.45</p>
+                    <p><b>Major Subjects:</b> Computer Vision | Fundamentals of Image Processing | Artificial
+                        Intelligence |
+                        Computational Intelligence | Internet of Things.</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="container">
+                    <div class="container">
+                        <div class="container">
+                            <div class="container">
+                                <div class="container">
+                                    <div class="container">
+                                        <div class="container">
+                                            <div class="container">
+                                                <div class="container">
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin: 0 auto;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7">
+                    <b><p style="font-size: 25px;">F.S.C Pre-Engineering</p></b>
+                    <b><p>Army Public School and College</p></b>
+                    <p><b>Marks:</b> 942/1100</p>
+                    <p><b>Major Subjects:</b> Computer Vision | Fundamentals of Image Processing | Artificial
+                        Intelligence |
+                        Computational Intelligence | Internet of Things.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects/professional -->
+    <div class="p-4" style="color: white; font-size: 20px;">
+        <div class="container">
+            <h2 class="text-center">Projects</h2>
+            <br>
+            <br>
+            <div class="row" style="margin: 0 auto;">
+                <div class="col-md-12">
+                    <h3>Professional Projects</h3>
+                    <hr style="background-color: white">
+                    <h4>Yellow Cards</h4>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="container">
+                                <p style="font-size: 17px">
+                                    This project focused on providing businessmen a platform to spread their information
+                                    and
+                                    services
+                                    easily and quickly. One part of it was to use Computer Vision to automate the
+                                    textual
+                                    information
+                                    extraction of their business cards.
+
+                                    We began by testing the existing available Optical Character Recognization software
+                                    like
+                                    Tesseract
+                                    and Easy OCR but even after image processing the presence of the slightest noise or
+                                    blur
+                                    in the
+                                    images resulted in unsatisfactory results.
+
+                                    Therefore we started working on building our own OCR using the latest research we
+                                    found
+                                    on Text
+                                    Recognition and Text Detection. Our Custom made OCR used a Convolutional Recurrent
+                                    Neural
+                                    Network
+                                    for character recognizer and CRAFT powered text detector, covering all of English
+                                    alphabets,
+                                    numbers, and special characters.
+                                </p>
+                                <p style="font-size: 17px">
+                                    My major role was developing computer vision models for Detection and Recognition of
+                                    Text in business cards. I also developed
+                                    the algorithms that organized the extracted textual information according to their
+                                    position in the images, futhermore I used LSTM
+                                    to identify important information like Phone Numbers.
+                                    I was also involved in building the user authentication system and the datasets for
+                                    handling user images and extracted textual information.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{% static 'home/test5.jpg' %}">
+                        </div>
+                    </div>
+                    <hr>
+
+
+                    <h4>ORFOL</h4>
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="container" style="font-size: 17px">
+                                <p>
+                                    Object Reported Lost and Found (ORFOL) was a project focused on providing people a
+                                    platform to
+                                    report their lost items or report found items to the people in their area. The app
+                                    would recognize the items and help user fill in form quicker. Later
+                                    the app would match lost and found reports with each other and give suggestions to
+                                    its users.
+                                </p>
+                                <p>
+                                    My responsibility was to devise a way to automate the report filling and matching
+                                    using
+                                    AI.
+                                    ORFOL
+                                    was to recognize nearly 35 commonly lost items automatically to assist the user and
+                                    extract
+                                    useful
+                                    information about the items to help the user fill their report form.
+
+                                    I collected, cleaned, annotated, and augmented the entire dataset and used a range
+                                    of
+                                    Object
+                                    detection models to get the best results include DarkNet YOLO, RetinaNet and Faster
+                                    RCNN.
+                                    I was also responsible for building the backend for handling input and output of
+                                    data from the machine learning models which included building and maintaining
+                                    the databases, building the user authentication and making the algorithm for match
+                                    Lost and Found reports using Natural Language Processing.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="container">
+                                <img src="{% static 'home/detection.png' %}">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <h4>Vicinality</h4>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="container" style="font-size: 17px">
+                                <p>
+                                    Vinivality is a website that can help people find other people with similar social
+                                    interests
+                                    based
+                                    on their bios and location.
+
+                                    My responsibility was to develop a friend recommendations system for Vicinality
+                                    using
+                                    Natural
+                                    Language Processing based on interests, age groups, political interest, personality
+                                    type, and
+                                    work
+                                    type.
+
+                                    I employed an unsupervised approach to the problem by using K-means clustering
+                                    algorithm
+                                    to
+                                    cluster
+                                    people based on their provided information and recommendations were given from the
+                                    top
+                                    matches
+                                    from
+                                    within their vicinity.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Academic -->
+    <div class="p-4" style="background-color: white; font-size: 20px;">
+        <div class="container">
+
+            <br>
+            <div class="row" style="margin: 0 auto;">
+                <div class="col-md-12">
+                    <h3>Academic Projects</h3>
+                    <hr style="background-color: black">
+                    <p class="inline" style="font-size: 25px">Cancer Analysis and Detection using Deep Learning</p>
+                    <p class="inline">(Thesis/ FYP)</p>
+                    <div class="row">
+                        <div class="container" style="font-size: 15px">
+                            <div class="col-md-12">
+                                <p>
+                                    This was my Final Year Thesis Project that I completed during my AI Research
+                                    Fellowship
+                                    at
+                                    Pattern Recognition Lab. This project was related to Medical Image Processing and
+                                    Segmentation.
+                                    My responsibility was to create an automated pipeline that could detect and segment
+                                    malignant
+                                    (cancerous) cells in breast tissue images.
+
+                                    I collected a dataset that contained images of 74 patients for training, 24 patients
+                                    samples for
+                                    testing, and 11 patients for validation. I used a Mask RCNN for localization and
+                                    segmentation
+                                    but the false positive rate was quite high so I added another step for further
+                                    classification. I
+                                    created two classes of true-positive and false-positive cells and used transfer
+                                    learning
+                                    to
+                                    trained a CNN. So, whatever cell that was detected from the Mask RCNN was further
+                                    checked by the
+                                    CNN which included the f-score from 0.6 to 0.75.
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <b><p>Project Pipeline</p></b>
+                                <img src="{% static 'home/MASK RCNN.jpg' %}">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <p class="inline" style="font-size: 25px">First Person View Drone Racing</p>
+                    <p class="inline">(Thesis/ FYP)</p>
+                    <div class="row">
+                        <div class="container" style="font-size: 15px">
+                            <div class="col-md-12">
+                                <p>
+                                    I completed this project while working as an intern at Quest Lab. My objective was
+                                    to create
+                                    a system that would stream live video feed of the drone to a mobile phone in a VR
+                                    headset.
+                                    The user wearing the headset, could control the drones movement using his head
+                                    motion.
+                                    This would give the user a First-person-view(FPV) of the drone which could be used
+                                    for drone racing.
+                                </p>
+                            </div>
+                            <div class="col-md-12" id="parent">
+                                <div class="center">
+                                    <img style="text-align:center;" src="{% static 'home/ezgif.com-gif-maker.gif' %}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <p style="font-size: 25px">Facial Recognition System for selfie drones</p>
+                    <div class="row">
+                        <div class="container" style="font-size: 15px">
+                            <div class="col-md-12">
+                                <p>
+                                    My objective of this project was to create a system for selfie drones that would
+                                    follow around its user
+                                    automatically. I need to use facial recognition for this project so I employed an
+                                    implementation of
+                                    FaceNet API for face recognition and used image processing to de-noise the image. I
+                                    also used open-cv
+                                    haar cascade to filter out the face in each frame for FaceNet.
+                                    I also developed the code that changed the drones movements according to the user
+                                    movements
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <img class='drone_img' src="{% static 'home/drone.jpg' %}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interests -->
+    <div class="" style="background-color:black; color: white" id="parent">
+        <div class="container p-4">
+            <h1 class="text-center">Hobbies</h1>
+        </div>
+        <div class="">
+            <p style="font-size: 25px">I play Guitar some times but I'm still a Rookie :)</p>
+            <img style="opacity: 50%" src="{% static 'home/1.jpg' %}">
+        </div>
+        <div class="">
+            <p class="pt-5" style="font-size: 25px">I play R-6</p>
+            <img style="opacity: 90%" src="{% static 'home/Rainbow-Six-23.jpg' %}">
+        </div>
+        <div class="">
+            <p class="pt-5" style="font-size: 25px">..and Dota2</p>
+            <img style="opacity: 50%" src="{% static 'home/dota2.jpg' %}">
+        </div>
+        <br>
+        <br>
+    </div>
+
+    <div class="p-5" style="color: black; background-color: white">
+        <div class="container p-4">
+            <h2 class="text-center">Contact Me</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    <ul class="nav flex-column mb-0">
+                        <li class="nav-item">
+                            <a href="../../static/home/Muhammad%20Ahsan%20Mukhtar%20CV.pdf" class="nav-link"
+                               style="font-size: 20px; color: black;">
+                                <i class="fa fa-arrow-circle-down mr-3 fa-fw" aria-hidden="true"></i>
+                                CV
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://github.com/ahsan44411" class="nav-link"
+                               style="font-size: 20px; color: black;">
+                                <i class="fa fa-github mr-3 fa-fw" aria-hidden="true"></i>
+                                GitHub
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 20px; color: black;">
+                                <i class="fa fa-map-marker mr-3 fa-fw" aria-hidden="true"></i>
+                                Lahore | Gujranwala
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-5">
+                    <ul class="nav flex-column mb-0">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               style="font-size: 20px; color: black;">
+                                <i class="fa fa-mobile mr-3 fa-fw" aria-hidden="true"></i>
+                                +92-333-4230930
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               style="font-size: 20px; color: black;">
+                                <i class="fa fa-envelope mr-3 fa-fw" aria-hidden="true"></i>
+                                ahsan44411@gmail.com
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://www.linkedin.com/in/muhammad-ahsan-mukhtar/" class="nav-link"
+                               style="font-size: 20px; color: black;">
+                                <i class="fa fa-linkedin-square mr-3 fa-fw" aria-hidden="true"></i>
+                                LinkedIn
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- End content -->
+<script>
+    $(".arrowbtn").on("click", function () {
+        $('html,body').animate({
+                scrollTop: $(".arrowbtn").offset().top
+            },
+            'slow');
+    });
+    try {
+        fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", {
+            method: 'HEAD',
+            mode: 'no-cors'
+        })).then(function (response) {
+            return true;
+        }).catch(function (e) {
+            var carbonScript = document.createElement("script");
+            carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+            carbonScript.id = "_carbonads_js";
+            document.getElementById("carbon-block").appendChild(carbonScript);
+        });
+    } catch (error) {
+        console.log(error);
+    }
+</script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+    $(function () {
+        // Sidebar toggle behavior
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar, #content').toggleClass('active');
+        });
+    });
+
+    function scrollWin() {
+        window.scrollBy(0, 850);
+    }
+</script>
+</body>
+</html>
